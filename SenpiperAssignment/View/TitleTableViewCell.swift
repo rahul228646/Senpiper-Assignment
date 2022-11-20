@@ -17,7 +17,7 @@ class TitleTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Rahul"
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        
         return label
     }()
     
@@ -30,18 +30,30 @@ class TitleTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    private let indicator : UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(systemName: "arrow.right", withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .heavy))
+        imageView.tintColor = .gray
+        
+        return imageView
+    }()
+    
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        updateColors()
+    }
+ 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        if self.traitCollection.userInterfaceStyle == .dark {
-//            contentView.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.00)
-//        }
-//        else {
-//            contentView.backgroundColor = .systemBackground
-//        }
+        updateColors()
         contentView.addSubview(titleLabel)
         contentView.addSubview(titleImage)
-        accessoryType = .disclosureIndicator
+        contentView.addSubview(indicator)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: contentView.frame.height*0.30)
         layoutConstraints()
     }
     
@@ -53,6 +65,16 @@ class TitleTableViewCell: UITableViewCell {
         super.layoutSubviews()
         titleLabel.frame = contentView.bounds
         titleImage.frame = contentView.bounds
+        indicator.frame = contentView.bounds
+    }
+    
+    private func updateColors(){
+        if self.traitCollection.userInterfaceStyle == .dark {
+            contentView.backgroundColor = .systemGray6
+        }
+        else {
+            contentView.backgroundColor = .white
+        }
     }
     
     private func layoutConstraints() {
@@ -64,9 +86,12 @@ class TitleTableViewCell: UITableViewCell {
             titleImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
            
             
-            titleLabel.leadingAnchor.constraint(equalTo: titleImage.trailingAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: titleImage.trailingAnchor, constant: 10),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            titleLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.6)
+            titleLabel.widthAnchor.constraint(equalToConstant: contentView.frame.width*0.6),
+            
+            indicator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            indicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
             
         ])
     }

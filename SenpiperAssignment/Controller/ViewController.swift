@@ -17,27 +17,22 @@ class ViewController: UIViewController {
         let table = UITableView()
         table.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.identifier)
         table.translatesAutoresizingMaskIntoConstraints = false
-//        table.layer.borderWidth = 2
-//        table.layer.cornerRadius = 10
+        table.layer.borderWidth = 2
+        table.layer.cornerRadius = 10
+        table.layer.borderColor = UIColor.systemBackground.cgColor
+        table.showsVerticalScrollIndicator = false
         return table
     }()
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        updateColors()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "News"
-//        if self.traitCollection.userInterfaceStyle == .dark {
-//            print("dark")
-//            view.backgroundColor = .systemBackground
-//            newsTableView.layer.borderColor = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.00).cgColor
-//        } else {
-//            print("light")
-//            view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
-//            newsTableView.layer.borderColor = UIColor.white.cgColor
-//        }
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        
+        updateColors()
         view.addSubview(newsTableView)
         newsTableView.frame = view.bounds
         newsTableView.delegate = self
@@ -60,6 +55,20 @@ class ViewController: UIViewController {
             
         }
     }
+    
+    private func updateColors() {
+        if self.traitCollection.userInterfaceStyle == .dark {
+            view.backgroundColor = .systemBackground
+            newsTableView.layer.borderColor = UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.00).cgColor
+        } else {
+      
+            view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
+            newsTableView.layer.borderColor = UIColor.white.cgColor
+        }
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     
     private func configureLayout() {
         NSLayoutConstraint.activate([
@@ -97,7 +106,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 150
     }
     
     

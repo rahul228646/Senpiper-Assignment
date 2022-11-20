@@ -14,8 +14,8 @@
             filePath = "SenpiperAssignment/View/TitleTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "init?(coder:)"
             landmarkType = "7">
             <Locations>
@@ -62,8 +62,8 @@
             filePath = "SenpiperAssignment/View/TitleTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "layoutConstraints()"
             landmarkType = "7">
          </BreakpointContent>
